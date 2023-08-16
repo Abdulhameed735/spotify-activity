@@ -7,7 +7,11 @@
 		"build": "next build",
 		"start": "next start",
 		"lint": "next lint",
-		"format": "prettier --plugin-search-dir . --write ."
+		"format": "prettier --write .",
+		"prepare": "husky install"
+	},
+	"lint-staged": {
+		"**/*": "prettier --write --ignore-unknown"
 	},
 	"dependencies": {
 		"@radix-ui/react-avatar": "^1.0.3",
@@ -29,10 +33,12 @@
 		"tailwind-merge": "^1.14.0",
 		"tailwindcss": "3.3.3",
 		"tailwindcss-animate": "^1.0.6",
-		"typescript": "5.1.6"
+		"typescript": "4.5.6"
 	},
 	"devDependencies": {
 		"eslint-config-prettier": "^9.0.0",
+		"husky": "^8.0.3",
+		"lint-staged": "^14.0.0",
 		"prettier": "3.0.1",
 		"prettier-plugin-tailwindcss": "^0.5.2"
 	}
