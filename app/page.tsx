@@ -1,14 +1,7 @@
 "use client";
 import { useAuth0 } from "@auth0/auth0-react";
 import Link from "next/link";
-import type { Metadata } from "next";
 import { Button } from "@/components/ui/button";
-
-export const metadata: Metadata = {
-	title: "Spotify activity",
-	description:
-		"Explore your music journey like never before with Spotify-Activity! Gain fascinating insights into your Spotify usage, from your most-played tracks and artists to your evolving music preferences. Dive into a world of data-driven discovery, all while enjoying the tunes that define your moments. Unveil your musical story with Spotify-Activity."
-};
 
 export default function Home() {
 	const { loginWithRedirect } = useAuth0();
