@@ -1,7 +1,18 @@
-import { Button } from "@/components/ui/button";
+"use client";
+import { useAuth0 } from "@auth0/auth0-react";
 import Link from "next/link";
+import type { Metadata } from "next";
+import { Button } from "@/components/ui/button";
+
+export const metadata: Metadata = {
+	title: "Spotify activity",
+	description:
+		"Explore your music journey like never before with Spotify-Activity! Gain fascinating insights into your Spotify usage, from your most-played tracks and artists to your evolving music preferences. Dive into a world of data-driven discovery, all while enjoying the tunes that define your moments. Unveil your musical story with Spotify-Activity."
+};
 
 export default function Home() {
+	const { loginWithRedirect } = useAuth0();
+
 	return (
 		<main className="flex h-screen w-screen flex-col bg-slate-950 lg:flex-row">
 			<aside className="relative flex w-full flex-1 flex-col justify-center bg-slate-950 px-5 pt-8 text-[#1db954] lg:w-7/12 lg:px-8">
@@ -24,7 +35,12 @@ export default function Home() {
 					<h1 className="text-center text-[20px] leading-[1.2] md:text-[32px] md:leading-[1.25]">
 						Log in to Spotify
 					</h1>
-					<Button className="rounded-lg bg-[#1db954] hover:bg-[#1ed655be]">Log In</Button>
+					<Button
+						className="rounded-lg bg-[#1db954] hover:bg-[#1ed655be]"
+						onClick={() => loginWithRedirect()}
+					>
+						Log In
+					</Button>
 				</div>
 				<div></div>
 			</aside>

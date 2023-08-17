@@ -1,7 +1,9 @@
+"use client";
 import "./styles/globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
+import { Auth0Provider } from "@auth0/auth0-react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,7 +19,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 			<body className={inter.className}>
 				{" "}
 				<ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-					{children}
+					<Auth0Provider
+						domain={process.env.NEXT_PUBLIC_AUTH0_DOMAIN as string}
+						clientId={process.env.NEXT_PUBLIC_AUTH0_CLIENT_ID as string}
+						authorizationParams={{
+							redirect_uri: "http://localhost:3000/home"
+						}}
+					>
+						{children}
+					</Auth0Provider>
 				</ThemeProvider>
 			</body>
 		</html>
