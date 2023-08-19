@@ -8,30 +8,23 @@ const Home = () => {
 	const { user, isAuthenticated, logout, getAccessTokenSilently } = useAuth0();
 	const [profileImageUrl, setProfileImageUrl] = useState<string>("");
 
-	// const handleFetchProfileImage = async () => {
-	// 	try {
-	// 		const accessToken = await getAccessTokenSilently();
+	const handleFetchProfileImage = async () => {
+		try {
+			const accessToken = await getAccessTokenSilently();
 
-	// 		const response = await fetch(`/api/profile?access_token=${accessToken}`);
-	// 		const data = await response.json();
+			console.log(accessToken);
+		} catch (error) {
+			console.error("Error fetching accessToken:", error);
+		}
+	};
 
-	// 		setProfileImageUrl(data.profileImageUrl);
-	// 		console.log(data);
-	// 	} catch (error) {
-	// 		console.error("Error fetching profile image:", error);
-	// 	}
-	// };
-
-	// useEffect(() => {
-	// 	handleFetchProfileImage();
-	// }, []);
+	useEffect(() => {
+		handleFetchProfileImage();
+	}, []);
 
 	return (
 		isAuthenticated && (
 			<div>
-				{/* {profileImageUrl && (
-					<Image src={profileImageUrl} width={500} height={500} alt="user image" />
-				)} */}
 				<h2>{user?.name}</h2>
 				<p>{user?.email}</p>
 				<Button onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>
