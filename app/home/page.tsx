@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Button } from "@/components/ui/button";
 
@@ -12,7 +13,14 @@ const Home = () => {
 		try {
 			const accessToken = await getAccessTokenSilently();
 
-			console.log(accessToken);
+			const response = await axios.get("/api/profile", {
+				headers: {
+					Authorization: `Bearer ${accessToken}`
+				}
+			});
+
+			const data = response.data;
+			console.log(data);
 		} catch (error) {
 			console.error("Error fetching accessToken:", error);
 		}

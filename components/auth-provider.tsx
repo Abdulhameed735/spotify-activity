@@ -15,7 +15,11 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 		<Auth0Provider
 			domain={domain}
 			clientId={clientId}
-			authorizationParams={{ redirect_uri: `${redirectUri as string}/home` }}
+			authorizationParams={{
+				redirect_uri: `${redirectUri as string}/home`,
+				scope:
+					"openid profile email user-read-private user-read-email playlist-read-private playlist-modify-public"
+			}}
 		>
 			{children}
 		</Auth0Provider>
