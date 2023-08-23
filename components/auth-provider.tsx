@@ -5,16 +5,17 @@ import React from "react";
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 	const domain = process.env.NEXT_PUBLIC_AUTH0_DOMAIN as string;
 	const clientId = process.env.NEXT_PUBLIC_AUTH0_CLIENT_ID as string;
+
 	const redirectUri =
 		process.env.NODE_ENV === "development"
-			? (process.env.DEV_REDIRECT as string)
-			: (process.env.PROD_REDIRECT as string);
+			? process.env.NEXT_PUBLIC_DEV_REDIRECT
+			: process.env.NEXT_PUBLIC_PROD_REDIRECT;
 
 	return (
 		<Auth0Provider
 			domain={domain}
 			clientId={clientId}
-			authorizationParams={{ redirect_uri: redirectUri }}
+			authorizationParams={{ redirect_uri: `${redirectUri as string}/home` }}
 		>
 			{children}
 		</Auth0Provider>
