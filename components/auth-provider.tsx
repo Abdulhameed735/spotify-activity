@@ -17,6 +17,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 			clientId={clientId}
 			authorizationParams={{
 				redirect_uri: `${redirectUri as string}/home`,
+				audience: "https://api.spotify.com/",
 				scope:
 					"openid profile email user-read-private user-read-email playlist-read-private playlist-modify-public"
 			}}

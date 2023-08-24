@@ -9,7 +9,7 @@ const Home = () => {
 	const { user, isAuthenticated, logout, getAccessTokenSilently } = useAuth0();
 	const [profileImageUrl, setProfileImageUrl] = useState<string>("");
 
-	const handleFetchProfileImage = async () => {
+	const handleFetchProfile = async () => {
 		try {
 			const accessToken = await getAccessTokenSilently();
 
@@ -27,7 +27,7 @@ const Home = () => {
 	};
 
 	useEffect(() => {
-		handleFetchProfileImage();
+		handleFetchProfile();
 	}, []);
 
 	return (
