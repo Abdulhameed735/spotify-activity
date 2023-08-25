@@ -1,11 +1,9 @@
 "use client";
-import { useAuth0 } from "@auth0/auth0-react";
 import Link from "next/link";
+import { signIn } from "next-auth/react";
 import { Button } from "@/components/ui/button";
 
 export default function Home() {
-	const { loginWithRedirect } = useAuth0();
-
 	return (
 		<main className="flex h-screen w-screen flex-col bg-slate-950 lg:flex-row">
 			<aside className="relative flex w-full flex-1 flex-col justify-center bg-slate-950 px-5 pt-8 text-[#1db954] lg:w-7/12 lg:px-8">
@@ -30,7 +28,7 @@ export default function Home() {
 					</h1>
 					<Button
 						className="rounded-lg bg-[#1db954] hover:bg-[#1ed655be]"
-						onClick={() => loginWithRedirect()}
+						onClick={() => signIn("spotify")}
 					>
 						Log In
 					</Button>
