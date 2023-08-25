@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 
 const LandingPage = () => {
 	return (
-		<main className="flex h-screen w-screen flex-col bg-slate-950 lg:flex-row">
+		<div className="flex h-screen w-screen flex-col bg-slate-950 lg:flex-row">
 			<aside className="relative flex w-full flex-1 flex-col justify-center bg-slate-950 px-5 pt-8 text-[#1db954] lg:w-7/12 lg:px-8">
 				<Link href="/">
 					<nav className="absolute left-0 top-8 flex w-full cursor-pointer px-6 md:top-[22px] md:px-6 lg:px-8">
@@ -34,7 +34,7 @@ const LandingPage = () => {
 				</div>
 				<div></div>
 			</aside>
-		</main>
+		</div>
 	);
 };
 
