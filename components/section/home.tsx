@@ -7,12 +7,13 @@ import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { useEffect, useState } from "react";
 
 const HomePage = () => {
-	const { data: session } = useSession();
+	const { data, status } = useSession();
+	const session = data as Session & { accessToken: string | null };
 	const [userProfile, setUserProfile] = useState();
 
 	useEffect(() => {
 		async function ProfileData() {
-			if (session && session.accessToken) {
+			if (status === "authenticated" && session) {
 				try {
 					const response = await axios.get("/api/profile", {
 						headers: {
@@ -27,19 +28,17 @@ const HomePage = () => {
 			}
 		}
 		ProfileData();
-	}, [session]);
+	}, [status, session]);
 
-	if (!session) {
+	if (status === "loading") {
 		return <p>Loading...</p>;
 	}
 
-	const { user } = session;
-
 	return (
 		<div className="">
-			<h1>Welcome, {user?.name}!</h1>
+			<h1>Welcome, {session?.user?.name}!</h1>
 			<Avatar>
-				<AvatarImage src={user?.image as string}></AvatarImage>
+				<AvatarImage src={session?.user?.image as string}></AvatarImage>
 			</Avatar>
 
 			<Button className="rounded-lg bg-[#1db954] hover:bg-[#1ed655be]" onClick={() => signOut()}>
