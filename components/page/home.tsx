@@ -5,6 +5,7 @@ import axios from "axios";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { useEffect, useState } from "react";
+import Sidebar from "@/components/section/sidebar";
 
 const HomePage = () => {
 	const { data, status } = useSession();
@@ -35,16 +36,12 @@ const HomePage = () => {
 	}
 
 	return (
-		<div className="">
-			<h1>Welcome, {session?.user?.name}!</h1>
-			<Avatar>
-				<AvatarImage src={session?.user?.image as string}></AvatarImage>
-			</Avatar>
-
-			<Button className="rounded-lg bg-[#1db954] hover:bg-[#1ed655be]" onClick={() => signOut()}>
-				Sign out
-			</Button>
-		</div>
+		<main className="relative flex min-h-screen w-full flex-col bg-slate-950 text-white lg:flex-row">
+			<Sidebar />
+			<section className="">
+				<h1>Hey</h1>
+			</section>
+		</main>
 	);
 };
 
