@@ -1,5 +1,8 @@
+"use client";
 import { User2Icon, Mic2Icon, MusicIcon, HistoryIcon, ListMusicIcon } from "lucide-react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { cn } from "@/lib/utils";
 import Image from "next/image";
 
 const navmenu = [
@@ -36,6 +39,8 @@ const navmenu = [
 ];
 
 const Sidebar = () => {
+	const pathname = usePathname();
+
 	return (
 		<div className="fixed bottom-0 flex w-full flex-col items-center justify-between gap-3 bg-slate-800  p-3 lg:left-0 lg:top-0 lg:w-[8%]">
 			<Link href="/" className="hidden lg:block">
@@ -49,14 +54,18 @@ const Sidebar = () => {
 			</Link>
 
 			<div className="flex w-full flex-row justify-between gap-x-3 lg:flex-col lg:gap-y-8">
-				{navmenu.map((item) => (
-					<Link key={item.id} href={item.url}>
-						<div className="flex flex-col items-center gap-y-2 text-white">
-							<item.icon size={24} />
-							<span className="text-center text-sm">{item.name}</span>
-						</div>
-					</Link>
-				))}
+				{navmenu.map((link) => {
+					const isActive = pathname === link.url;
+
+					return (
+						<Link key={link.id} href={link.url}>
+							<div className={cn("flex flex-col items-center gap-y-2", {})}>
+								<link.icon size={24} />
+								<span className="text-center text-sm">{link.name}</span>
+							</div>
+						</Link>
+					);
+				})}
 			</div>
 
 			<a target="_blank" href="https://github.com/Abdulhameed735" className="hidden lg:block">

@@ -89,15 +89,15 @@ const ProfilePage = () => {
 						<div className="flex items-center gap-4">
 							<div className="flex flex-col items-center space-y-2">
 								<div className="text-xl font-bold">{userProfile.followers.total}</div>
-								<p className="uppercase text-[#1db954]">Followers</p>
+								<p className="text-base uppercase leading-relaxed text-[#1db954]">Followers</p>
 							</div>
 							<div className="flex flex-col items-center space-y-2">
 								<div className="text-xl font-bold">{userProfile.followers.total}</div>
-								<p className="uppercase text-[#1db954]">Following</p>
+								<p className="text-base uppercase leading-relaxed text-[#1db954]">Following</p>
 							</div>
 							<Link href="/playlist" className="flex flex-col items-center space-y-2">
 								<div className="text-xl font-bold">19</div>
-								<p className="uppercase text-[#1db954]">Playlists</p>
+								<p className="text-base uppercase leading-relaxed text-[#1db954]">Playlists</p>
 							</Link>
 						</div>
 
