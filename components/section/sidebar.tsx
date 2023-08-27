@@ -1,4 +1,4 @@
-import { User2Icon, Mic2Icon, MusicIcon, HistoryIcon } from "lucide-react";
+import { User2Icon, Mic2Icon, MusicIcon, HistoryIcon, ListMusicIcon } from "lucide-react";
 import Link from "next/link";
 
 const navmenu = [
@@ -25,15 +25,21 @@ const navmenu = [
 		name: "Recent",
 		icon: HistoryIcon,
 		url: "/recent"
+	},
+	{
+		id: 5,
+		name: "Playlist",
+		icon: ListMusicIcon,
+		url: "/playlist"
 	}
 ];
 
 const Sidebar = () => {
 	return (
-		<div className="fixed bottom-0 flex w-full flex-col items-center justify-between gap-3 bg-slate-800 p-1 lg:left-0 lg:top-0 lg:w-[8%] lg:p-3">
+		<div className="fixed bottom-0 flex w-full flex-col items-center justify-between gap-3 bg-slate-800  p-3 lg:left-0 lg:top-0 lg:w-[8%]">
 			<div className="hidden lg:block">logo</div>
 
-			<div className="flex flex-row gap-x-3 lg:flex-col lg:gap-y-8">
+			<div className="flex w-full flex-row justify-between gap-x-3 lg:flex-col lg:gap-y-8">
 				{navmenu.map((item) => (
 					<Link key={item.id} href={item.url}>
 						<div className="flex flex-col items-center gap-y-2 text-white">

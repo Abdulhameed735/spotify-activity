@@ -19,7 +19,7 @@ const HomeLayout = ({ children }: { children: React.ReactNode }) => {
 			<aside className="w-[8%] bg-slate-800">
 				<Sidebar />
 			</aside>
-			{children}
+			<div className="flex-1">{children}</div>
 		</main>
 	);
 };
