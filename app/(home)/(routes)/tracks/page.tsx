@@ -1,5 +1,9 @@
 const TopTracks = () => {
-	return <div>TopTracks</div>;
+	return (
+		<div>
+			<h1>Top Tracks</h1>
+		</div>
+	);
 };
 
 export default TopTracks;

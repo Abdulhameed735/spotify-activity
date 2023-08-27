@@ -34,7 +34,11 @@ const ProfilePage = () => {
 		return <p>Loading...</p>;
 	}
 
-	return <h1>Hey</h1>;
+	return (
+		<div>
+			<h1>Profile Page</h1>
+		</div>
+	);
 };
 
 export default ProfilePage;
