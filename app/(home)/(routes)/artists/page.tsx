@@ -1,5 +1,3 @@
-import { withAuth } from "@/helpers/protected-route";
-
 const TopArtists = () => {
 	return (
 		<div>
@@ -8,4 +6,4 @@ const TopArtists = () => {
 	);
 };
 
-export default withAuth(TopArtists);
+export default TopArtists;
