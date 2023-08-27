@@ -6,7 +6,7 @@ const navmenu = [
 		id: 1,
 		name: "Profile",
 		icon: User2Icon,
-		url: "/"
+		url: "/profile"
 	},
 	{
 		id: 2,

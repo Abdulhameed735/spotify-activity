@@ -1,3 +1,5 @@
+import { withAuth } from "@/helpers/protected-route";
+
 const TopTracks = () => {
 	return (
 		<div>
@@ -6,4 +8,4 @@ const TopTracks = () => {
 	);
 };
 
-export default TopTracks;
+export default withAuth(TopTracks);

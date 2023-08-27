@@ -1,11 +1,17 @@
 "use client";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { Button } from "@/components/ui/button";
 
 export default function Home() {
 	const { data: session } = useSession();
+	const router = useRouter();
+
+	if (session) {
+		router.push("/profile");
+	}
 
 	return (
 		<div className="flex h-screen w-screen flex-col bg-slate-950 lg:flex-row">
@@ -31,7 +37,7 @@ export default function Home() {
 					</h1>
 					<Button
 						className="rounded-lg bg-[#1db954] hover:bg-[#1ed655be]"
-						onClick={() => signIn("spotify")}
+						onClick={() => signIn("spotify", { callbackUrl: "http://localhost:3000/profile" })}
 					>
 						Log In
 					</Button>

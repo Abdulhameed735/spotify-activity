@@ -5,6 +5,7 @@ import axios from "axios";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { useEffect, useState } from "react";
+import { withAuth } from "@/helpers/protected-route";
 
 const ProfilePage = () => {
 	const { data, status } = useSession();
@@ -37,8 +38,11 @@ const ProfilePage = () => {
 	return (
 		<div>
 			<h1>Profile Page</h1>
+			<Button className="rounded-lg bg-[#1db954] hover:bg-[#1ed655be]" onClick={() => signOut()}>
+				Signout
+			</Button>
 		</div>
 	);
 };
 
-export default ProfilePage;
+export default withAuth(ProfilePage);
