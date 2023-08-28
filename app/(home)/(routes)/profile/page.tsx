@@ -1,6 +1,6 @@
 "use client";
 import { useSession, signOut } from "next-auth/react";
-import { Session, User } from "next-auth";
+import { Session } from "next-auth";
 import axios from "axios";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
@@ -53,7 +53,7 @@ const ProfilePage = () => {
 						}
 					});
 					setUserProfile(response.data.data);
-					console.log(response.data.data);
+					// console.log(response.data.data);
 				} catch (error) {
 					console.error("Error fetching profile data:", error);
 				}
