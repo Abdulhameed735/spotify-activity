@@ -3,10 +3,11 @@ import { useSession, signOut } from "next-auth/react";
 import { Session, User } from "next-auth";
 import axios from "axios";
 import { Button } from "@/components/ui/button";
-import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import TopArtists from "@/components/section/top-artists";
+import TopTracks from "@/components/section/top-tracks";
 
 interface UserProfile {
 	display_name: string;
@@ -66,8 +67,8 @@ const ProfilePage = () => {
 	}
 
 	return (
-		<div className="flex h-full flex-col items-center p-3 lg:p-5">
-			<div className="flex flex-col items-center gap-4">
+		<div className="flex h-full flex-col gap-y-16 p-3 lg:p-5">
+			<header className="flex flex-col items-center gap-4">
 				{userProfile && userProfile.images && (
 					<div className="h-32 w-32 overflow-hidden rounded-full lg:h-48 lg:w-48">
 						<Image
@@ -109,7 +110,12 @@ const ProfilePage = () => {
 						</Button>
 					</div>
 				)}
-			</div>
+			</header>
+
+			<section className="grid w-full grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-10">
+				<TopArtists />
+				<TopTracks />
+			</section>
 		</div>
 	);
 };
