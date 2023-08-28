@@ -80,7 +80,7 @@ const TopArtists = () => {
 				<ul className="flex flex-col gap-y-4">
 					{userTopartists?.items.map((item) => (
 						<li key={item.id} className="flex items-center">
-							<Link href={`/artist/${item.id}`} passHref>
+							<Link href={`/artists/${item.id}`} passHref>
 								<div className="flex items-center gap-3">
 									<div>
 										<Image

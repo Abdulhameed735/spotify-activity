@@ -119,7 +119,7 @@ const TopTracks = () => {
 				<ul className="flex flex-col gap-y-4">
 					{userToptracks?.items.map((track) => (
 						<li key={track.id}>
-							<Link className="flex gap-3" href={`/track/${track.id}`}>
+							<Link className="flex gap-3" href={`/tracks/${track.id}`}>
 								<div>
 									<Image src={track.album.images[0].url} width={50} height={50} alt={track.name} />
 								</div>
@@ -130,7 +130,7 @@ const TopTracks = () => {
 											{track.artists.map((artist, index) => (
 												<React.Fragment key={artist.id}>
 													{index > 0 && ","}
-													<Link className="truncate hover:underline" href={`/artist/${artist.id}`}>
+													<Link className="truncate hover:underline" href={`/artists/${artist.id}`}>
 														{artist.name}
 													</Link>
 												</React.Fragment>
