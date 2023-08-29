@@ -70,13 +70,14 @@ const ProfilePage = () => {
 		<div className="flex h-full flex-col gap-y-16 p-3 lg:p-5">
 			<header className="flex flex-col items-center gap-4">
 				{userProfile && userProfile.images && (
-					<div className="h-32 w-32 overflow-hidden rounded-full lg:h-48 lg:w-48">
-						<Image
-							src={userProfile.images[1].url}
-							alt="User Profile Image"
-							width={200}
-							height={200}
-						/>
+					<div>
+						<picture>
+							<img
+								src={userProfile.images[1].url}
+								alt="User Profile Image"
+								className="h-[130px] w-[130px] rounded-full object-cover md:h-[170px] md:w-[170px] lg:h-[190px] lg:w-[190px]"
+							/>
+						</picture>
 					</div>
 				)}
 				{userProfile && (

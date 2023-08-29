@@ -93,23 +93,24 @@ const TopArtists = () => {
 				</div>
 			</header>
 
-			<section className="grid w-full grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-5 lg:gap-5">
+			<section className="md:lg-grid-cols-3 grid w-full grid-cols-2 gap-3 lg:grid-cols-5 lg:gap-5">
 				{userTopartists?.items.map((artist) => (
-					<div key={artist.id} className="flex flex-col items-center gap-y-4 text-center">
-						<Link href={`/artists/${artist.id}`}>
-							<div className="h-[200px] w-[200px] overflow-hidden rounded-full">
-								<Image
+					<div
+						key={artist.id}
+						className="flex w-full flex-col items-center gap-y-4 text-center lg:w-auto"
+					>
+						<div>
+							<picture>
+								<img
+									className="h-[150px] w-[150px] rounded-full object-cover md:h-[170px] md:w-[170px] lg:h-[190px] lg:w-[190px]"
 									src={artist.images[0].url}
 									alt={artist.name}
-									width={200}
-									height={200}
-									objectFit="cover"
 								/>
-							</div>
+							</picture>
+						</div>
 
-							<Link href={`/artists/${artist.id}`} className="font-semibold hover:underline">
-								{artist.name}
-							</Link>
+						<Link href={`/artists/${artist.id}`} className="font-semibold hover:underline">
+							{artist.name}
 						</Link>
 					</div>
 				))}
