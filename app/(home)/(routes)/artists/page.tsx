@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import Image from "next/image";
+import { cn } from "@/lib/utils";
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { Session } from "next-auth";
@@ -71,21 +71,30 @@ const TopArtists = () => {
 				<h2 className="text-center text-xl font-bold lg:text-2xl">Top Artists</h2>
 				<div className="flex justify-around gap-3">
 					<button
-						className="bg-transparent p-2 font-semibold"
+						className={cn(
+							"bg-transparent p-2 font-semibold",
+							selectedTimeRange === "long_term" ? "underline" : ""
+						)}
 						onClick={() => fetchTopArtists("long_term")}
 					>
 						<span>All Time</span>
 					</button>
 
 					<button
-						className="bg-transparent p-2 font-semibold"
+						className={cn(
+							"bg-transparent p-2 font-semibold",
+							selectedTimeRange === "medium_term" ? "underline" : ""
+						)}
 						onClick={() => fetchTopArtists("medium_term")}
 					>
 						<span>Last 6 months</span>
 					</button>
 
 					<button
-						className="bg-transparent p-2 font-semibold"
+						className={cn(
+							"bg-transparent p-2 font-semibold",
+							selectedTimeRange === "short_term" ? "underline" : ""
+						)}
 						onClick={() => fetchTopArtists("short_term")}
 					>
 						<span>Last 4 weeks</span>
