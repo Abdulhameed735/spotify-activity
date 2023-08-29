@@ -6,7 +6,6 @@ import { Session } from "next-auth";
 import axios from "axios";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import { Avatar, AvatarImage } from "../ui/avatar";
 
 interface ArtistsResponse {
 	external_urls: {
