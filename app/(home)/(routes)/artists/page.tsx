@@ -47,7 +47,7 @@ const TopArtists = () => {
 	const fetchTopArtists = async (timeRange: string) => {
 		if (status === "authenticated" && session) {
 			try {
-				const limit = 10;
+				const limit = 30;
 				const response = await axios.get(`/api/artists?limit=${limit}&time_range=${timeRange}`, {
 					headers: {
 						Authorization: `Bearer ${session.accessToken}`
@@ -93,21 +93,23 @@ const TopArtists = () => {
 				</div>
 			</header>
 
-			<section className="md:lg-grid-cols-3 grid w-full grid-cols-2 gap-3 lg:grid-cols-5 lg:gap-5">
+			<section className="grid w-full grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-5 lg:gap-5">
 				{userTopartists?.items.map((artist) => (
 					<div key={artist.id} className="flex flex-col items-center gap-y-4 text-center">
-						<div className="h-[200px] w-[200px] overflow-hidden rounded-full">
-							<Image
-								src={artist.images[0].url}
-								alt={artist.name}
-								width={200}
-								height={200}
-								objectFit="cover"
-							/>
-						</div>
+						<Link href={`/artists/${artist.id}`}>
+							<div className="h-[200px] w-[200px] overflow-hidden rounded-full">
+								<Image
+									src={artist.images[0].url}
+									alt={artist.name}
+									width={200}
+									height={200}
+									objectFit="cover"
+								/>
+							</div>
 
-						<Link href={`/artists/${artist.id}`} className="font-semibold hover:underline">
-							{artist.name}
+							<Link href={`/artists/${artist.id}`} className="font-semibold hover:underline">
+								{artist.name}
+							</Link>
 						</Link>
 					</div>
 				))}
