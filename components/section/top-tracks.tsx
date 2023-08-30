@@ -6,78 +6,8 @@ import { Session } from "next-auth";
 import axios from "axios";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-
-interface TracksResponse {
-	album: {
-		album_type: string;
-		artists: {
-			external_urls: {
-				spotify: string;
-			};
-			href: string;
-			id: string;
-			name: string;
-			type: string;
-			uri: string;
-		}[];
-		available_markets: string[];
-		external_urls: {
-			spotify: string;
-		};
-		href: string;
-		id: string;
-		images: {
-			height: number;
-			url: string;
-			width: number;
-		}[];
-		name: string;
-		release_date: string;
-		release_date_precision: string;
-		total_tracks: number;
-		type: string;
-		uri: string;
-	};
-	artists: {
-		external_urls: {
-			spotify: string;
-		};
-		href: string;
-		id: string;
-		name: string;
-		type: string;
-		uri: string;
-	}[];
-	available_markets: string[];
-	disc_number: number;
-	duration_ms: number;
-	explicit: boolean;
-	external_ids: {
-		isrc: string;
-	};
-	external_urls: {
-		spotify: string;
-	};
-	href: string;
-	id: string;
-	is_local: boolean;
-	name: string;
-	popularity: number;
-	preview_url: string;
-	track_number: number;
-	type: string;
-	uri: string;
-}
-
-interface UserTopTracksResponse {
-	href: string;
-	limit: number;
-	next: string | null;
-	offset: number;
-	previous: string | null;
-	total: number;
-	items: TracksResponse[];
-}
+import { UserTopTracksResponse } from "@/types";
+import TrackListItem from "../ui/tracklist-item";
 
 const TopTracks = () => {
 	const { data, status } = useSession();
@@ -95,7 +25,6 @@ const TopTracks = () => {
 						}
 					});
 					setUserToptracks(response.data.data);
-					// console.log(response.data.data);
 				} catch (error) {
 					console.error("Error fetching profile data:", error);
 				}
@@ -119,27 +48,7 @@ const TopTracks = () => {
 				<ul className="flex flex-col gap-y-4">
 					{userToptracks?.items.map((track) => (
 						<li key={track.id}>
-							<Link className="flex gap-3" href={`/tracks/${track.id}`}>
-								<div>
-									<Image src={track.album.images[0].url} width={50} height={50} alt={track.name} />
-								</div>
-								<div className="flex">
-									<div className="flex flex-col gap-y-1">
-										<span className="hover:underline">{track.name}</span>
-										<div className="flex gap-1 text-sm text-slate-300">
-											{track.artists.map((artist, index) => (
-												<React.Fragment key={artist.id}>
-													{index > 0 && ","}
-													<Link className="truncate hover:underline" href={`/artists/${artist.id}`}>
-														{artist.name}
-													</Link>
-												</React.Fragment>
-											))}
-											·<span className="hover:underline">{track.album.name}</span>
-										</div>
-									</div>
-								</div>
-							</Link>
+							<TrackListItem track={track} />
 						</li>
 					))}
 				</ul>

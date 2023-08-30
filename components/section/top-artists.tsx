@@ -6,38 +6,7 @@ import { Session } from "next-auth";
 import axios from "axios";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-
-interface ArtistsResponse {
-	external_urls: {
-		spotify: string;
-	};
-	followers: {
-		href: string;
-		total: number;
-	};
-	genres: string[];
-	href: string;
-	id: string;
-	images: {
-		url: string;
-		height: number;
-		width: number;
-	}[];
-	name: string;
-	popularity: number;
-	type: string;
-	uri: string;
-}
-
-interface UserTopArtistsResponse {
-	href: string;
-	limit: number;
-	next: string | null;
-	offset: number;
-	previous: string | null;
-	total: number;
-	items: ArtistsResponse[];
-}
+import { UserTopArtistsResponse } from "@/types";
 
 const TopArtists = () => {
 	const { data, status } = useSession();
@@ -55,7 +24,6 @@ const TopArtists = () => {
 						}
 					});
 					setUserTopartists(response.data.data);
-					// console.log(response.data.data);
 				} catch (error) {
 					console.error("Error fetching profile data:", error);
 				}
@@ -77,22 +45,22 @@ const TopArtists = () => {
 
 			<div>
 				<ul className="flex flex-col gap-y-4">
-					{userTopartists?.items.map((item) => (
-						<li key={item.id} className="flex items-center">
-							<Link href={`/artists/${item.id}`} passHref>
+					{userTopartists?.items.map((artist) => (
+						<li key={artist.id} className="flex items-center">
+							<Link href={`/artists/${artist.id}`} passHref>
 								<div className="flex items-center gap-3">
 									<div>
-										<Image
-											src={item.images[0].url}
-											alt={item.name}
-											width={50}
-											height={50}
-											className="rounded-full"
-										/>
+										<picture>
+											<img
+												className="h-[50px] w-[50px] rounded-full object-cover"
+												src={artist.images[0].url}
+												alt={artist.name}
+											/>
+										</picture>
 									</div>
 									<div>
-										<p className="font-semibold hover:underline">{item.name}</p>
-										<p className="text-sm text-gray-500">Popularity: {item.popularity}</p>
+										<p className="font-semibold hover:underline">{artist.name}</p>
+										<p className="text-sm text-gray-500">Popularity: {artist.popularity}</p>
 									</div>
 								</div>
 							</Link>
