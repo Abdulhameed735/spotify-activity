@@ -7,86 +7,8 @@ import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { Session } from "next-auth";
 import axios from "axios";
-
-interface TracksResponse {
-	album: {
-		album_type: string;
-		artists: {
-			external_urls: {
-				spotify: string;
-			};
-			href: string;
-			id: string;
-			name: string;
-			type: string;
-			uri: string;
-		}[];
-		available_markets: string[];
-		external_urls: {
-			spotify: string;
-		};
-		href: string;
-		id: string;
-		images: {
-			height: number;
-			url: string;
-			width: number;
-		}[];
-		name: string;
-		release_date: string;
-		release_date_precision: string;
-		total_tracks: number;
-		type: string;
-		uri: string;
-	};
-	artists: {
-		external_urls: {
-			spotify: string;
-		};
-		href: string;
-		id: string;
-		name: string;
-		type: string;
-		uri: string;
-	}[];
-	available_markets: string[];
-	disc_number: number;
-	duration_ms: number;
-	explicit: boolean;
-	external_ids: {
-		isrc: string;
-	};
-	external_urls: {
-		spotify: string;
-	};
-	href: string;
-	id: string;
-	is_local: boolean;
-	name: string;
-	popularity: number;
-	preview_url: string;
-	track_number: number;
-	type: string;
-	uri: string;
-}
-
-interface UserTopTracksResponse {
-	href: string;
-	limit: number;
-	next: string | null;
-	offset: number;
-	previous: string | null;
-	total: number;
-	items: TracksResponse[];
-}
-
-const convertMillisecondsToTime = (milliseconds: number) => {
-	const totalSeconds = Math.floor(milliseconds / 1000);
-	const minutes = Math.floor(totalSeconds / 60);
-	const seconds = totalSeconds % 60;
-
-	return `${minutes}:${seconds.toString().padStart(2, "0")}`;
-};
+import { convertMillisecondsToTime } from "@/utils/convert-time";
+import { UserTopTracksResponse } from "@/types";
 
 const TopTracks = () => {
 	const { data, status } = useSession();
@@ -94,15 +16,18 @@ const TopTracks = () => {
 	const [userToptracks, setUserToptracks] = useState<UserTopTracksResponse | null>(null);
 	const [selectedTimeRange, setSelectedTimeRange] = useState("long_term");
 
-	const fetchTopArtists = async (timeRange: string) => {
+	const fetchTopArtists = async (topItem: string, timeRange: string) => {
 		if (status === "authenticated" && session) {
 			try {
 				const limit = 30;
-				const response = await axios.get(`/api/tracks?limit=${limit}&time_range=${timeRange}`, {
-					headers: {
-						Authorization: `Bearer ${session.accessToken}`
+				const response = await axios.get(
+					`/api/top-items?top_item=${topItem}&limit=${limit}&time_range=${timeRange}`,
+					{
+						headers: {
+							Authorization: `Bearer ${session.accessToken}`
+						}
 					}
-				});
+				);
 				setUserToptracks(response.data.data);
 				console.log(response.data.data);
 			} catch (error) {
@@ -112,7 +37,7 @@ const TopTracks = () => {
 	};
 
 	useEffect(() => {
-		fetchTopArtists(selectedTimeRange);
+		fetchTopArtists("tracks", selectedTimeRange);
 	}, [selectedTimeRange, status, session]);
 
 	return (
@@ -125,7 +50,7 @@ const TopTracks = () => {
 							"bg-transparent p-2 font-semibold",
 							selectedTimeRange === "long_term" ? "underline" : ""
 						)}
-						onClick={() => fetchTopArtists("long_term")}
+						onClick={() => fetchTopArtists("tracks", "long_term")}
 					>
 						<span>All Time</span>
 					</button>
@@ -135,7 +60,7 @@ const TopTracks = () => {
 							"bg-transparent p-2 font-semibold",
 							selectedTimeRange === "medium_term" ? "underline" : ""
 						)}
-						onClick={() => fetchTopArtists("medium_term")}
+						onClick={() => fetchTopArtists("tracks", "medium_term")}
 					>
 						<span>Last 6 months</span>
 					</button>
@@ -145,7 +70,7 @@ const TopTracks = () => {
 							"bg-transparent p-2 font-semibold",
 							selectedTimeRange === "short_term" ? "underline" : ""
 						)}
-						onClick={() => fetchTopArtists("short_term")}
+						onClick={() => fetchTopArtists("tracks", "short_term")}
 					>
 						<span>Last 4 weeks</span>
 					</button>

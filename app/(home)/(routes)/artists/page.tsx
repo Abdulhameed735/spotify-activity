@@ -5,38 +5,7 @@ import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { Session } from "next-auth";
 import axios from "axios";
-
-interface ArtistsResponse {
-	external_urls: {
-		spotify: string;
-	};
-	followers: {
-		href: string;
-		total: number;
-	};
-	genres: string[];
-	href: string;
-	id: string;
-	images: {
-		url: string;
-		height: number;
-		width: number;
-	}[];
-	name: string;
-	popularity: number;
-	type: string;
-	uri: string;
-}
-
-interface UserTopArtistsResponse {
-	href: string;
-	limit: number;
-	next: string | null;
-	offset: number;
-	previous: string | null;
-	total: number;
-	items: ArtistsResponse[];
-}
+import { UserTopArtistsResponse } from "@/types";
 
 const TopArtists = () => {
 	const { data, status } = useSession();
@@ -44,15 +13,18 @@ const TopArtists = () => {
 	const [userTopartists, setUserTopartists] = useState<UserTopArtistsResponse | null>(null);
 	const [selectedTimeRange, setSelectedTimeRange] = useState("long_term");
 
-	const fetchTopArtists = async (timeRange: string) => {
+	const fetchTopArtists = async (topItem: string, timeRange: string) => {
 		if (status === "authenticated" && session) {
 			try {
 				const limit = 30;
-				const response = await axios.get(`/api/artists?limit=${limit}&time_range=${timeRange}`, {
-					headers: {
-						Authorization: `Bearer ${session.accessToken}`
+				const response = await axios.get(
+					`/api/top-items?top_item=${topItem}&limit=${limit}&time_range=${timeRange}`,
+					{
+						headers: {
+							Authorization: `Bearer ${session.accessToken}`
+						}
 					}
-				});
+				);
 				setUserTopartists(response.data.data);
 				console.log(response.data.data);
 			} catch (error) {
@@ -62,7 +34,7 @@ const TopArtists = () => {
 	};
 
 	useEffect(() => {
-		fetchTopArtists(selectedTimeRange);
+		fetchTopArtists("artists", selectedTimeRange);
 	}, [selectedTimeRange, status, session]);
 
 	return (
@@ -75,7 +47,7 @@ const TopArtists = () => {
 							"bg-transparent p-2 font-semibold",
 							selectedTimeRange === "long_term" ? "underline" : ""
 						)}
-						onClick={() => fetchTopArtists("long_term")}
+						onClick={() => fetchTopArtists("artists", "long_term")}
 					>
 						<span>All Time</span>
 					</button>
@@ -85,7 +57,7 @@ const TopArtists = () => {
 							"bg-transparent p-2 font-semibold",
 							selectedTimeRange === "medium_term" ? "underline" : ""
 						)}
-						onClick={() => fetchTopArtists("medium_term")}
+						onClick={() => fetchTopArtists("artists", "medium_term")}
 					>
 						<span>Last 6 months</span>
 					</button>
@@ -95,7 +67,7 @@ const TopArtists = () => {
 							"bg-transparent p-2 font-semibold",
 							selectedTimeRange === "short_term" ? "underline" : ""
 						)}
-						onClick={() => fetchTopArtists("short_term")}
+						onClick={() => fetchTopArtists("artists", "short_term")}
 					>
 						<span>Last 4 weeks</span>
 					</button>

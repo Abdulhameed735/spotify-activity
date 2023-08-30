@@ -4,39 +4,10 @@ import { Session } from "next-auth";
 import axios from "axios";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import TopArtists from "@/components/section/top-artists";
 import TopTracks from "@/components/section/top-tracks";
-
-interface UserProfile {
-	display_name: string;
-	external_urls: {
-		spotify: string;
-	};
-	href: string;
-	id: string;
-	images: UserProfileImage[];
-	type: string;
-	uri: string;
-	followers: {
-		href: null | string;
-		total: number;
-	};
-	country: string;
-	product: string;
-	explicit_content: {
-		filter_enabled: boolean;
-		filter_locked: boolean;
-	};
-	email: string;
-}
-
-interface UserProfileImage {
-	url: string;
-	height: number;
-	width: number;
-}
+import { UserProfile } from "@/types";
 
 const ProfilePage = () => {
 	const { data, status } = useSession();
@@ -53,7 +24,6 @@ const ProfilePage = () => {
 						}
 					});
 					setUserProfile(response.data.data);
-					// console.log(response.data.data);
 				} catch (error) {
 					console.error("Error fetching profile data:", error);
 				}
