@@ -85,11 +85,11 @@ const TopTracks = () => {
 	const [userToptracks, setUserToptracks] = useState<UserTopTracksResponse | null>(null);
 
 	useEffect(() => {
-		async function fetchTopTracks() {
+		async function fetchTopTracks(topItem: string) {
 			if (status === "authenticated" && session) {
 				try {
 					const limit = 10;
-					const response = await axios.get(`/api/tracks?limit=${limit}`, {
+					const response = await axios.get(`/api/top-items?top_item=${topItem}&limit=${limit}`, {
 						headers: {
 							Authorization: `Bearer ${session.accessToken}`
 						}
@@ -101,7 +101,7 @@ const TopTracks = () => {
 				}
 			}
 		}
-		fetchTopTracks();
+		fetchTopTracks("tracks");
 	}, [status, session]);
 
 	return (

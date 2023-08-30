@@ -45,11 +45,11 @@ const TopArtists = () => {
 	const [userTopartists, setUserTopartists] = useState<UserTopArtistsResponse | null>(null);
 
 	useEffect(() => {
-		async function fetchTopArtists() {
+		async function fetchTopArtists(topItem: string) {
 			if (status === "authenticated" && session) {
 				try {
 					const limit = 10;
-					const response = await axios.get(`/api/artists?limit=${limit}`, {
+					const response = await axios.get(`/api/top-items?top_item=${topItem}&limit=${limit}`, {
 						headers: {
 							Authorization: `Bearer ${session.accessToken}`
 						}
@@ -61,7 +61,7 @@ const TopArtists = () => {
 				}
 			}
 		}
-		fetchTopArtists();
+		fetchTopArtists("artists");
 	}, [status, session]);
 
 	return (
