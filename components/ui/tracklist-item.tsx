@@ -22,17 +22,17 @@ const TrackLinkItem: React.FC<TrackLinkItemProps> = ({ track }) => {
 			<div>
 				<Image src={track.album.images[0].url} width={50} height={50} alt={track.name} />
 			</div>
-			<div className="flex w-full items-center justify-between">
-				<div className="flex flex-col gap-y-1">
+			<div className="flex w-full gap-2">
+				<div className="flex-1 flex-col gap-y-1">
 					<span className="hover:underline">{track.name}</span>
 					<div className="flex gap-1 text-sm text-slate-300">
 						{track.artists.map((artist, index) => (
-							<React.Fragment key={artist.id}>
-								{index > 0 && ","}
-								<Link className="truncate hover:underline" href={`/artists/${artist.id}`}>
+							<div className="" key={artist.id}>
+								{index > 0 && ", "}
+								<Link className="hover:underline" href={`/artists/${artist.id}`}>
 									{artist.name}
 								</Link>
-							</React.Fragment>
+							</div>
 						))}
 						·<span className="hover:underline">{track.album.name}</span>
 					</div>
