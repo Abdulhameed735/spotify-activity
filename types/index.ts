@@ -4,3 +4,4 @@ export * from "./playlist";
 export * from "./profile";
 export * from "./artist";
 export * from "./tracks";
+export * from "./artists-data";

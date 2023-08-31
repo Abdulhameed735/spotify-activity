@@ -4,13 +4,15 @@ export interface Image {
 	width: number;
 }
 
+export interface ExternalUrls {
+	spotify: string;
+}
+
 export interface Album {
 	album_type: string;
 	total_tracks: number;
 	available_markets: string[];
-	external_urls: {
-		spotify: string;
-	};
+	external_urls: ExternalUrls;
 	href: string;
 	id: string;
 	images: Image[];
@@ -26,9 +28,7 @@ export interface Album {
 }
 
 export interface Artist {
-	external_urls: {
-		spotify: string;
-	};
+	external_urls: ExternalUrls;
 	followers: {
 		href: string;
 		total: number;
@@ -55,9 +55,7 @@ export interface Track {
 		ean: string;
 		upc: string;
 	};
-	external_urls: {
-		spotify: string;
-	};
+	external_urls: ExternalUrls;
 	href: string;
 	id: string;
 	is_playable: boolean;
