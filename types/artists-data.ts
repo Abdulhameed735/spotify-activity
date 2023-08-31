@@ -1,9 +1,11 @@
-import { Artist, ExternalUrls, Track, Album } from ".";
+import { Artist, Track, Album } from ".";
 
 interface ArtistData {
 	artistInfo: Artist;
-	artistAlbums: Album;
-	artistTopTracks: Track;
+	artistAlbums: {
+		items: Album[];
+	};
+	artistTopTracks: { tracks: Track[] };
 	artistRelatedArtists: Artist;
 }
 

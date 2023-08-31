@@ -1,11 +1,11 @@
 "use client";
 import Link from "next/link";
-import { cn } from "@/lib/utils";
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { Session } from "next-auth";
 import axios from "axios";
 import { ArtistData } from "@/types";
+import TrackListItem from "@/components/ui/tracklist-item";
 
 const ArtistPage = ({ params }: { params: { id: string } }) => {
 	const { data, status } = useSession();
@@ -66,7 +66,7 @@ const ArtistPage = ({ params }: { params: { id: string } }) => {
 							<p className="text-sm font-semibold uppercase text-green-400">Genres</p>
 							<div className="mt-1 flex capitalize">
 								{artistsData.artistInfo.genres.map((genre) => (
-									<h6 key={genre} className="ml-2 text-xs">
+									<h6 key={genre} className="ml-2 text-sm lg:text-base">
 										{genre}
 									</h6>
 								))}
@@ -75,6 +75,46 @@ const ArtistPage = ({ params }: { params: { id: string } }) => {
 					</div>
 				</div>
 			)}
+
+			<div className="flex flex-col gap-y-5 px-5">
+				<h2 className="text-center text-xl  font-semibold">Artist discography</h2>
+				<div className="flex flex-col gap-y-3">
+					<h2 className="text-lg font-medium">Albums</h2>
+					<div className="grid w-full grid-cols-2 gap-2 md:grid-cols-3 lg:grid-cols-5 lg:gap-3">
+						{artistsData?.artistAlbums.items.map((albums) => (
+							<div
+								key={albums.id}
+								className="flex w-full flex-col items-center gap-y-4 text-center lg:w-auto"
+							>
+								<div>
+									<picture>
+										<img
+											className="h-[130px] w-[130px] rounded object-cover md:h-[140px] md:w-[140px] lg:h-[150px] lg:w-[150px]"
+											src={albums.images[0].url}
+											alt={albums.name}
+										/>
+									</picture>
+								</div>
+
+								<Link href={`/albums/${albums.id}`} className="font-semibold hover:underline">
+									{albums.name}
+								</Link>
+							</div>
+						))}
+					</div>
+				</div>
+
+				<div className="flex flex-col gap-y-3">
+					<h2 className="text-lg font-medium">Popular releases</h2>
+					<ul className="flex flex-col gap-y-4">
+						{artistsData?.artistTopTracks.tracks.map((track) => (
+							<li key={track.id}>
+								<TrackListItem track={track} />
+							</li>
+						))}
+					</ul>
+				</div>
+			</div>
 		</div>
 	);
 };

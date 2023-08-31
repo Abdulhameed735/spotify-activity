@@ -15,7 +15,7 @@ export async function GET(request: Request) {
 
 	const apiEndpoints = [
 		`https://api.spotify.com/v1/artists/${id}`,
-		`https://api.spotify.com/v1/artists/${id}/albums`,
+		`https://api.spotify.com/v1/artists/${id}/albums?include_groups=album`,
 		`https://api.spotify.com/v1/artists/${id}/top-tracks?country=US`,
 		`https://api.spotify.com/v1/artists/${id}/related-artists`
 	];
@@ -33,8 +33,8 @@ export async function GET(request: Request) {
 
 	const data = {
 		artistInfo: responses[0],
-		artistAlbums: responses[1].items,
-		artistTopTracks: responses[2].tracks,
+		artistAlbums: responses[1],
+		artistTopTracks: responses[2],
 		relatedArtists: responses[3].artists
 	};
 

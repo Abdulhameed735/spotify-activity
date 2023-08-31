@@ -73,7 +73,7 @@ const TopArtists = () => {
 				</div>
 			</header>
 
-			<section className="md:lg-grid-cols-3 grid w-full grid-cols-2 gap-3 lg:grid-cols-5 lg:gap-5">
+			<section className="grid w-full grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-5 lg:gap-5">
 				{userTopartists?.items.map((artist) => (
 					<div
 						key={artist.id}
