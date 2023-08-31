@@ -6,7 +6,7 @@ interface ArtistData {
 		items: Album[];
 	};
 	artistTopTracks: { tracks: Track[] };
-	artistRelatedArtists: Artist;
+	relatedArtists: { artists: Artist[] };
 }
 
 export type { ArtistData };

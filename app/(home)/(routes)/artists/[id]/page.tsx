@@ -114,6 +114,33 @@ const ArtistPage = ({ params }: { params: { id: string } }) => {
 						))}
 					</ul>
 				</div>
+
+				<div className="flex flex-col gap-y-3">
+					<h2 className="text-lg font-medium">Fans also like</h2>
+
+					<div className="grid w-full grid-cols-2 gap-2 md:grid-cols-3 lg:grid-cols-5 lg:gap-3">
+						{artistsData?.relatedArtists.artists.map((artists) => (
+							<div
+								key={artists.id}
+								className="flex w-full flex-col items-center gap-y-4 text-center lg:w-auto"
+							>
+								<div>
+									<picture>
+										<img
+											className="h-[130px] w-[130px] rounded-full object-cover md:h-[140px] md:w-[140px] lg:h-[150px] lg:w-[150px]"
+											src={artists.images[0].url}
+											alt={artists.name}
+										/>
+									</picture>
+								</div>
+
+								<Link href={`/artists/${artists.id}`} className="font-semibold hover:underline">
+									{artists.name}
+								</Link>
+							</div>
+						))}
+					</div>
+				</div>
 			</div>
 		</div>
 	);

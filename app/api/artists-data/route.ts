@@ -35,7 +35,7 @@ export async function GET(request: Request) {
 		artistInfo: responses[0],
 		artistAlbums: responses[1],
 		artistTopTracks: responses[2],
-		relatedArtists: responses[3].artists
+		relatedArtists: responses[3]
 	};
 
 	return NextResponse.json({
