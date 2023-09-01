@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { convertMillisecondsToTime } from "@/utils/convert-time";
 
-interface TrackLinkItemProps {
+interface TrackListItemProps {
 	track: {
 		id: string;
 		name: string;
@@ -16,7 +16,7 @@ interface TrackLinkItemProps {
 	};
 }
 
-const TrackLinkItem: React.FC<TrackLinkItemProps> = ({ track }) => {
+const TrackListItem: React.FC<TrackListItemProps> = ({ track }) => {
 	return (
 		<Link className="flex gap-3" href={`/tracks/${track.id}`}>
 			<div>
@@ -43,4 +43,4 @@ const TrackLinkItem: React.FC<TrackLinkItemProps> = ({ track }) => {
 	);
 };
 
-export default TrackLinkItem;
+export default TrackListItem;
