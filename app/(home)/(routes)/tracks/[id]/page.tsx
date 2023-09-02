@@ -42,7 +42,42 @@ const TracksPage = ({ params }: { params: { id: string } }) => {
 				</div>
 			) : (
 				<>
-					<div></div>
+					{tracksData?.tracksInfo && (
+						<div className="mb-10 flex flex-col items-center lg:flex-row">
+							<div className="max-w-[250px] lg:mr-10">
+								<picture>
+									<img
+										className="h-[150px] w-[150px] rounded object-cover md:h-[170px] md:w-[170px] lg:h-[190px] lg:w-[190px]"
+										src={tracksData.tracksInfo.album.images[0].url}
+										alt={tracksData.tracksInfo.name}
+									/>
+								</picture>
+							</div>
+							<div className="mt-4 flex-1 text-center lg:mt-0 lg:text-left">
+								<h1 className="mb-1 text-2xl font-semibold lg:text-3xl">
+									{tracksData.tracksInfo.name}
+								</h1>
+								<h2 className="mb-2 text-center text-xl font-medium text-slate-600 lg:text-left">
+									{tracksData.tracksInfo.artists.map((artist) => (
+										<span key={artist.id}>{artist.name}</span>
+									))}
+								</h2>
+								<h3 className="text-base text-slate-500">
+									<Link href={tracksData.tracksInfo.album.id}>
+										{tracksData.tracksInfo.album.name}
+									</Link>
+									&nbsp;.&nbsp;{new Date(tracksData.tracksInfo.album.release_date).getFullYear()}
+								</h3>
+
+								<Link
+									className="my-5 inline-block cursor-pointer rounded-3xl bg-green-500 px-5 py-3 font-semibold uppercase"
+									href={tracksData.tracksInfo.external_urls.spotify}
+								>
+									Play on Spotify
+								</Link>
+							</div>
+						</div>
+					)}
 				</>
 			)}
 		</div>
