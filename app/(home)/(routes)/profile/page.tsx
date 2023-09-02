@@ -27,6 +27,8 @@ const ProfilePage = () => {
 					setUserProfile(response.data.data);
 				} catch (error) {
 					console.error("Error fetching profile data:", error);
+				} finally {
+					setIsLoading(false);
 				}
 			}
 		}
@@ -36,7 +38,9 @@ const ProfilePage = () => {
 	return (
 		<div className="flex h-full flex-col gap-y-16 p-3 lg:p-5">
 			{isLoading ? (
-				<p>Loading...</p>
+				<div className="justidy-center flex items-center">
+					<p>Loading...</p>
+				</div>
 			) : (
 				<>
 					<header className="flex flex-col items-center gap-4">
