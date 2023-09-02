@@ -40,8 +40,8 @@ const Playlist = () => {
 	return (
 		<div className="flex h-full flex-col gap-y-16 p-3 lg:p-5">
 			{isLoading ? (
-				<div className="flex items-center justify-between">
-					<p>Loading..</p>
+				<div className="flex items-center justify-center">
+					<p>Loading...</p>
 				</div>
 			) : (
 				<>

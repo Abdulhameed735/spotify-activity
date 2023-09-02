@@ -43,7 +43,7 @@ const RecentPage = () => {
 	return (
 		<div className="flex h-full flex-col gap-y-16 p-3 lg:p-5">
 			{isLoading ? (
-				<div className="justify-senter flex items-center">
+				<div className="flex items-center justify-center">
 					<p>Loading...</p>
 				</div>
 			) : (
