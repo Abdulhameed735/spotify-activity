@@ -7,12 +7,12 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import TopArtists from "@/components/section/top-artists";
 import TopTracks from "@/components/section/top-tracks";
-import { UserProfile } from "@/types";
+import { Profile } from "@/types";
 
 const ProfilePage = () => {
 	const { data, status } = useSession();
 	const session = data as Session & { accessToken: string | null };
-	const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
+	const [userProfile, setUserProfile] = useState<Profile | null>(null);
 
 	useEffect(() => {
 		async function ProfileData() {
@@ -39,11 +39,11 @@ const ProfilePage = () => {
 	return (
 		<div className="flex h-full flex-col gap-y-16 p-3 lg:p-5">
 			<header className="flex flex-col items-center gap-4">
-				{userProfile && userProfile.images && (
+				{userProfile && userProfile.profile.images && (
 					<div>
 						<picture>
 							<img
-								src={userProfile.images[1].url}
+								src={userProfile.profile.images[1].url}
 								alt="User Profile Image"
 								className="h-[130px] w-[130px] rounded-full object-cover md:h-[170px] md:w-[170px] lg:h-[190px] lg:w-[190px]"
 							/>
@@ -52,23 +52,27 @@ const ProfilePage = () => {
 				)}
 				{userProfile && (
 					<div className="flex flex-col gap-5">
-						<a className="text-center" target="_blank" href={userProfile.external_urls.spotify}>
+						<a
+							className="text-center"
+							target="_blank"
+							href={userProfile.profile.external_urls.spotify}
+						>
 							<h2 className="text-center text-4xl font-bold hover:text-[#1ed655be] lg:text-5xl">
-								{userProfile.display_name}
+								{userProfile.profile.display_name}
 							</h2>
 						</a>
 
 						<div className="flex items-center gap-4">
 							<div className="flex flex-col items-center space-y-2">
-								<div className="text-xl font-bold">{userProfile.followers.total}</div>
+								<div className="text-xl font-bold">{userProfile.profile.followers.total}</div>
 								<p className="text-base uppercase leading-relaxed text-[#1db954]">Followers</p>
 							</div>
 							<div className="flex flex-col items-center space-y-2">
-								<div className="text-xl font-bold">{userProfile.followers.total}</div>
+								<div className="text-xl font-bold">{userProfile.profile.followers.total}</div>
 								<p className="text-base uppercase leading-relaxed text-[#1db954]">Following</p>
 							</div>
 							<Link href="/playlist" className="flex flex-col items-center space-y-2">
-								<div className="text-xl font-bold">19</div>
+								<div className="text-xl font-bold">{userProfile.playlist.total}</div>
 								<p className="text-base uppercase leading-relaxed text-[#1db954]">Playlists</p>
 							</Link>
 						</div>

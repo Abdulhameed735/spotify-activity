@@ -8,6 +8,63 @@ export interface ExternalUrls {
 	spotify: string;
 }
 
+export interface UserProfile {
+	display_name: string;
+	external_urls: {
+		spotify: string;
+	};
+	href: string;
+	id: string;
+	images: Image[];
+	type: string;
+	uri: string;
+	followers: {
+		href: null | string;
+		total: number;
+	};
+	country: string;
+	product: string;
+	explicit_content: {
+		filter_enabled: boolean;
+		filter_locked: boolean;
+	};
+	email: string;
+}
+
+export interface Owner {
+	external_urls: ExternalUrls;
+	followers: {
+		href: string;
+		total: number;
+	};
+	href: string;
+	id: string;
+	type: string;
+	uri: string;
+	display_name: string;
+}
+
+export interface Tracks {
+	href: string;
+	total: number;
+}
+
+export interface PlaylistResponse {
+	collaborative: boolean;
+	description: string;
+	external_urls: ExternalUrls;
+	href: string;
+	id: string;
+	images: Image[];
+	name: string;
+	owner: Owner;
+	public: boolean;
+	snapshot_id: string;
+	tracks: Tracks;
+	type: string;
+	uri: string;
+}
+
 export interface Album {
 	album_type: string;
 	total_tracks: number;

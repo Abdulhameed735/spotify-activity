@@ -7,13 +7,23 @@ export async function GET(request: Request) {
 		return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
 	}
 
-	const response = await fetch("https://api.spotify.com/v1/me", {
-		headers: {
-			Authorization: accessToken
-		}
-	});
+	const apiEndpoints = [`https://api.spotify.com/v1/me`, `https://api.spotify.com/v1/me/playlists`];
 
-	const data = await response.json();
+	const responses = await Promise.all(
+		apiEndpoints.map(async (endpoint) => {
+			const res = await fetch(endpoint, {
+				headers: {
+					Authorization: accessToken
+				}
+			});
+			return res.json();
+		})
+	);
+
+	const data = {
+		profile: responses[0],
+		playlist: responses[1]
+	};
 
 	return NextResponse.json({
 		hello: "My request works",
