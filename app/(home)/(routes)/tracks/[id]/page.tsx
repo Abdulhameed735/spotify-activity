@@ -88,40 +88,58 @@ const TracksPage = ({ params }: { params: { id: string } }) => {
 					{tracksData?.tracksAudioAnalysis && (
 						<div className="mb-10 grid w-full grid-cols-2 border-l border-t text-center lg:grid-cols-5">
 							<div className="border-b border-r px-3 py-4">
-								<h4>{convertMillisecondsToTime(tracksData.tracksAudioFeatures.duration_ms)}</h4>
+								<h4 className="text-lg font-medium">
+									{convertMillisecondsToTime(tracksData.tracksAudioFeatures.duration_ms)}
+								</h4>
 								<p className="text-sm text-slate-600">Duration</p>
 							</div>
 							<div className="border-b border-r px-3 py-4">
-								<h4>{tracksData.tracksInfo.popularity}</h4>
+								<h4 className="text-lg font-medium">{tracksData.tracksInfo.popularity}</h4>
 								<p className="text-sm text-slate-600">Popularity</p>
 							</div>
 							<div className="border-b border-r px-3 py-4">
-								<h4>{tracksData.tracksAudioAnalysis.track.key}</h4>
+								<h4 className="text-lg font-medium">{tracksData.tracksAudioAnalysis.track.key}</h4>
 								<p className="text-sm text-slate-600">Key</p>
 							</div>
 							<div className="border-b border-r px-3 py-4">
-								<h4>{tracksData.tracksAudioAnalysis.track.mode}</h4>
+								<h4 className="text-lg font-medium">{tracksData.tracksAudioAnalysis.track.mode}</h4>
 								<p className="text-sm text-slate-600">Modality</p>
 							</div>
 							<div className="border-b border-r px-3 py-4">
-								<h4>{tracksData.tracksAudioAnalysis.track.time_signature}</h4>
+								<h4 className="text-lg font-medium">
+									{tracksData.tracksAudioAnalysis.track.time_signature}
+								</h4>
 								<p className="text-sm text-slate-600">Time Signature</p>
 							</div>
 							<div className="border-b border-r px-3 py-4">
-								<h4>{tracksData.tracksAudioAnalysis.track.tempo}</h4>
-								<p className="text-sm text-slate-600">Tempo</p>
+								<h4 className="text-lg font-medium">
+									{tracksData.tracksAudioAnalysis.track.tempo}
+								</h4>
+								<p className="text-sm text-slate-600">Tempo (BPM)</p>
 							</div>
 							<div className="border-b border-r px-3 py-4">
-								<h4>{tracksData.tracksAudioAnalysis.beats.length}</h4>
+								<h4 className="text-lg font-medium">
+									{tracksData.tracksAudioAnalysis.beats.length}
+								</h4>
 								<p className="text-sm text-slate-600">Beats</p>
 							</div>
 							<div className="border-b border-r px-3 py-4">
-								<h4>{tracksData.tracksAudioAnalysis.bars.length}</h4>
+								<h4 className="text-lg font-medium">
+									{tracksData.tracksAudioAnalysis.bars.length}
+								</h4>
 								<p className="text-sm text-slate-600">Bars</p>
 							</div>
 							<div className="border-b border-r px-3 py-4">
-								<h4>{tracksData.tracksAudioAnalysis.sections.length}</h4>
+								<h4 className="text-lg font-medium">
+									{tracksData.tracksAudioAnalysis.sections.length}
+								</h4>
 								<p className="text-sm text-slate-600">Sections</p>
+							</div>
+							<div className="border-b border-r px-3 py-4">
+								<h4 className="text-lg font-medium">
+									{tracksData.tracksAudioAnalysis.segments.length}
+								</h4>
+								<p className="text-sm text-slate-600">Segments</p>
 							</div>
 						</div>
 					)}
