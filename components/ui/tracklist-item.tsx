@@ -28,10 +28,10 @@ const TrackListItem: React.FC<TrackListItemProps> = ({ track }) => {
 					<div className="flex gap-1 text-sm text-slate-300">
 						{track.artists.map((artist, index) => (
 							<div className="" key={artist.id}>
-								{index > 0 && ", "}
 								<Link className="hover:underline" href={`/artists/${artist.id}`}>
 									{artist.name}
 								</Link>
+								{index < track.artists.length - 1 && ", "}
 							</div>
 						))}
 						·<span className="hover:underline">{track.album.name}</span>

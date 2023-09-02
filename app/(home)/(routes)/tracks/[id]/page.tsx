@@ -5,6 +5,7 @@ import { useSession } from "next-auth/react";
 import { Session } from "next-auth";
 import axios from "axios";
 import { TracksData } from "@/types";
+import { convertMillisecondsToTime } from "@/utils/convert-time";
 
 const TracksPage = ({ params }: { params: { id: string } }) => {
 	const { data, status } = useSession();
@@ -58,10 +59,14 @@ const TracksPage = ({ params }: { params: { id: string } }) => {
 									{tracksData.tracksInfo.name}
 								</h1>
 								<h2 className="mb-2 text-center text-xl font-medium text-slate-600 lg:text-left">
-									{tracksData.tracksInfo.artists.map((artist) => (
-										<span key={artist.id}>{artist.name}</span>
+									{tracksData.tracksInfo.artists.map((artist, index) => (
+										<span key={artist.id}>
+											{artist.name}
+											{index < tracksData.tracksInfo.artists.length - 1 ? ", " : ""}
+										</span>
 									))}
 								</h2>
+
 								<h3 className="text-base text-slate-500">
 									<Link href={tracksData.tracksInfo.album.id}>
 										{tracksData.tracksInfo.album.name}
@@ -70,11 +75,53 @@ const TracksPage = ({ params }: { params: { id: string } }) => {
 								</h3>
 
 								<Link
-									className="my-5 inline-block cursor-pointer rounded-3xl bg-green-500 px-5 py-3 font-semibold uppercase"
+									className="my-5 inline-block cursor-pointer rounded-3xl bg-green-500 px-3 py-2 font-semibold uppercase"
 									href={tracksData.tracksInfo.external_urls.spotify}
+									target="_blank"
 								>
 									Play on Spotify
 								</Link>
+							</div>
+						</div>
+					)}
+
+					{tracksData?.tracksAudioAnalysis && (
+						<div className="mb-10 grid w-full grid-cols-2 border-l border-t text-center lg:grid-cols-5">
+							<div className="border-b border-r px-3 py-4">
+								<h4>{convertMillisecondsToTime(tracksData.tracksAudioFeatures.duration_ms)}</h4>
+								<p className="text-sm text-slate-600">Duration</p>
+							</div>
+							<div className="border-b border-r px-3 py-4">
+								<h4>{tracksData.tracksInfo.popularity}</h4>
+								<p className="text-sm text-slate-600">Popularity</p>
+							</div>
+							<div className="border-b border-r px-3 py-4">
+								<h4>{tracksData.tracksAudioAnalysis.track.key}</h4>
+								<p className="text-sm text-slate-600">Key</p>
+							</div>
+							<div className="border-b border-r px-3 py-4">
+								<h4>{tracksData.tracksAudioAnalysis.track.mode}</h4>
+								<p className="text-sm text-slate-600">Modality</p>
+							</div>
+							<div className="border-b border-r px-3 py-4">
+								<h4>{tracksData.tracksAudioAnalysis.track.time_signature}</h4>
+								<p className="text-sm text-slate-600">Time Signature</p>
+							</div>
+							<div className="border-b border-r px-3 py-4">
+								<h4>{tracksData.tracksAudioAnalysis.track.tempo}</h4>
+								<p className="text-sm text-slate-600">Tempo</p>
+							</div>
+							<div className="border-b border-r px-3 py-4">
+								<h4>{tracksData.tracksAudioAnalysis.beats.length}</h4>
+								<p className="text-sm text-slate-600">Beats</p>
+							</div>
+							<div className="border-b border-r px-3 py-4">
+								<h4>{tracksData.tracksAudioAnalysis.bars.length}</h4>
+								<p className="text-sm text-slate-600">Bars</p>
+							</div>
+							<div className="border-b border-r px-3 py-4">
+								<h4>{tracksData.tracksAudioAnalysis.sections.length}</h4>
+								<p className="text-sm text-slate-600">Sections</p>
 							</div>
 						</div>
 					)}
