@@ -5,12 +5,12 @@ import { useSession } from "next-auth/react";
 import { Session } from "next-auth";
 import axios from "axios";
 import { TracksData } from "@/types";
-import { Button } from "@/components/ui/button";
 
 const TracksPage = ({ params }: { params: { id: string } }) => {
 	const { data, status } = useSession();
 	const session = data as Session & { accessToken: string | null };
 	const [tracksData, setTracksData] = useState<TracksData | null>(null);
+	const [isLoading, setIsLoading] = useState(true);
 
 	const fetchTracksData = async () => {
 		if (status === "authenticated" && session) {
@@ -24,6 +24,8 @@ const TracksPage = ({ params }: { params: { id: string } }) => {
 				console.log(response.data.data);
 			} catch (error) {
 				console.error("Error fetching profile data:", error);
+			} finally {
+				setIsLoading(false);
 			}
 		}
 	};
@@ -32,7 +34,19 @@ const TracksPage = ({ params }: { params: { id: string } }) => {
 		fetchTracksData();
 	}, [status, session]);
 
-	return <div className="flex h-full flex-col gap-y-16 p-3 lg:p-5"></div>;
+	return (
+		<div className="flex h-full flex-col gap-y-16 p-3 lg:p-5">
+			{isLoading ? (
+				<div className="flex items-center justify-between">
+					<p>Loading...</p>
+				</div>
+			) : (
+				<>
+					<div></div>
+				</>
+			)}
+		</div>
+	);
 };
 
 export default TracksPage;
