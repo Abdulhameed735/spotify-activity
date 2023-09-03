@@ -17,8 +17,7 @@ const Playlist = () => {
 	const fetchPlaylist = async () => {
 		if (status === "authenticated" && session) {
 			try {
-				const limit = 30;
-				const response = await axios.get(`/api/playlist?limit=${limit}`, {
+				const response = await axios.get(`/api/playlist`, {
 					headers: {
 						Authorization: `Bearer ${session.accessToken}`
 					}
@@ -45,7 +44,6 @@ const Playlist = () => {
 				</div>
 			) : (
 				<>
-					{" "}
 					<header className="block items-center  justify-stretch gap-y-4 lg:flex lg:flex-row  lg:justify-between">
 						<h2 className="text-center text-xl font-bold lg:text-2xl">Your Playlists</h2>
 					</header>
@@ -54,7 +52,7 @@ const Playlist = () => {
 							<div key={playlist.id}>
 								<Link
 									className="flex w-full flex-col items-center gap-y-4 text-center lg:w-auto"
-									href={`/playlists/${playlist.id}`}
+									href={`/playlist/${playlist.id}`}
 								>
 									<div>
 										<picture>
@@ -66,10 +64,7 @@ const Playlist = () => {
 										</picture>
 									</div>
 
-									<Link
-										href={`/playlists/${playlist.id}`}
-										className="font-semibold hover:underline"
-									>
+									<Link href={`/playlist/${playlist.id}`} className="font-semibold hover:underline">
 										{playlist.name}
 									</Link>
 
