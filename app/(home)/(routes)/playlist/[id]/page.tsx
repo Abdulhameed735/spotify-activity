@@ -44,8 +44,8 @@ const PlaylistPage = ({ params }: { params: { id: string } }) => {
 				<>
 					{playlistData && (
 						<div className="flex flex-col lg:flex-row">
-							<div className="flex w-full min-w-[auto] flex-col justify-center text-center lg:w-[30%] lg:min-w-[200px]">
-								<div className="m-auto max-w-[250px] lg:mr-10">
+							<div className="w-full min-w-[auto] text-center lg:w-[30%] lg:min-w-[200px] ">
+								<div className=" max-w-[250px] lg:mr-10">
 									<picture>
 										<img
 											className="h-[150px] w-[150px] rounded object-cover md:h-[170px] md:w-[170px] lg:h-[190px] lg:w-[190px]"
