@@ -4,8 +4,20 @@ import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { Session } from "next-auth";
 import axios from "axios";
+import { Bar } from "react-chartjs-2";
 import { TracksData } from "@/types";
 import { convertMillisecondsToTime } from "@/utils/convert-time";
+import {
+	Chart as ChartJS,
+	CategoryScale,
+	LinearScale,
+	BarElement,
+	Title,
+	Tooltip,
+	Legend
+} from "chart.js";
+
+ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 const TracksPage = ({ params }: { params: { id: string } }) => {
 	const { data, status } = useSession();
@@ -22,7 +34,6 @@ const TracksPage = ({ params }: { params: { id: string } }) => {
 					}
 				});
 				setTracksData(response.data.data);
-				console.log(response.data.data);
 			} catch (error) {
 				console.error("Error fetching profile data:", error);
 			} finally {
@@ -147,6 +158,42 @@ const TracksPage = ({ params }: { params: { id: string } }) => {
 									</h4>
 									<p className="text-sm text-slate-600">Segments</p>
 								</div>
+							</div>
+						</div>
+					)}
+
+					{tracksData?.tracksAudioFeatures && (
+						<div>
+							<h1 className="mb-5 text-2xl font-semibold lg:text-3xl">Track Features</h1>
+							<div>
+								<Bar
+									data={{
+										labels: [
+											"acousticness",
+											"danceability",
+											"energy",
+											"liveness",
+											"speechiness",
+											"valence"
+										],
+										datasets: [
+											{
+												label: "Audio Features",
+												data: [
+													tracksData.tracksAudioFeatures.acousticness,
+													tracksData.tracksAudioFeatures.danceability,
+													tracksData.tracksAudioFeatures.energy,
+													tracksData.tracksAudioFeatures.liveness,
+													tracksData.tracksAudioFeatures.speechiness,
+													tracksData.tracksAudioFeatures.valence
+												],
+												borderWidth: 1,
+												backgroundColor: "rgba(75, 192, 192, 0.2)",
+												borderColor: "rgba(75, 192, 192, 1)"
+											}
+										]
+									}}
+								/>
 							</div>
 						</div>
 					)}
