@@ -74,3 +74,34 @@
 		@apply bg-background text-foreground;
 	}
 }
+
+.c-grid {
+	display: grid;
+	grid-template-columns: auto 1fr;
+	-webkit-box-align: center;
+	align-items: center;
+	margin-bottom: 30px;
+}
+
+.d2-grid {
+	display: grid;
+	grid-template-columns: 1fr max-content;
+	gap: 10px;
+}
+
+.d3-grid {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	padding-right: 1px;
+}
+
+.d4-grid {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	padding-right: 1px;
+	color: rgb(155, 155, 155);
+	font-size: 14px;
+	margin-top: 3px;
+}

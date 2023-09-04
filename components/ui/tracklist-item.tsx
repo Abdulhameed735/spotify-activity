@@ -18,23 +18,21 @@ interface TrackListItemProps {
 
 const TrackListItem: React.FC<TrackListItemProps> = ({ track }) => {
 	return (
-		<Link className="flex gap-3" href={`/tracks/${track.id}`}>
-			<div>
+		<Link className="c-grid" href={`/tracks/${track.id}`}>
+			<div className="pr-2">
 				<Image src={track.album.images[0].url} width={50} height={50} alt={track.name} />
 			</div>
-			<div className="flex w-full gap-2">
-				<div className="flex-1 flex-col gap-y-1">
-					<span className="hover:underline">{track.name}</span>
-					<div className="flex gap-1 text-sm text-slate-300">
+			<div className="d2-grid">
+				<div className="d3-grid">
+					<span className="mb-1.5 hover:underline">{track.name}</span>
+					<div className="d4-grid">
 						{track.artists.map((artist, index) => (
-							<div className="" key={artist.id}>
-								<Link className="hover:underline" href={`/artists/${artist.id}`}>
-									{artist.name}
-								</Link>
+							<Link key={artist.id} className="hover:underline" href={`/artists/${artist.id}`}>
+								{artist.name}
 								{index < track.artists.length - 1 && ", "}
-							</div>
+							</Link>
 						))}
-						·<span className="hover:underline">{track.album.name}</span>
+						&nbsp;·&nbsp;&nbsp;<span className="hover:underline">{track.album.name}</span>
 					</div>
 				</div>
 				<span className="text-base">{convertMillisecondsToTime(track.duration_ms)}</span>
