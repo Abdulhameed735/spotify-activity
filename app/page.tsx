@@ -27,7 +27,12 @@ export default function Home() {
 						</h1>
 					</nav>
 				</Link>
-				<h1>Hey</h1>
+				<h1 className="text-lg leading-[1.2] lg:text-xl lg:leading-[1.25]">
+					Explore your music journey like never before with Spotify-Activity! Gain fascinating
+					insights into your Spotify usage, from your most-played tracks and artists to your
+					evolving music preferences. Dive into a world of data-driven discovery, all while enjoying
+					the tunes that define your moments. Unveil your musical story with Spotify-Activity.
+				</h1>
 			</aside>
 
 			<aside className="relative flex w-full flex-col items-center justify-center rounded-t-3xl bg-black px-5 py-8 text-white lg:w-5/12 lg:rounded-none">
