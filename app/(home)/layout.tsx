@@ -15,11 +15,12 @@ const HomeLayout = ({ children }: { children: React.ReactNode }) => {
 	}, [session, router]);
 
 	return (
-		<main className="flex min-h-screen w-full flex-col bg-slate-950 text-white lg:flex-row">
-			<aside className="w-[8%] bg-slate-800">
+		<main className=" h-full min-h-screen w-full  bg-slate-950 text-white ">
+			<div className="pb-[50px] pl-0 lg:pl-[100px]">
 				<Sidebar />
-			</aside>
-			<div className="flex-1">{children}</div>
+
+				<div>{children}</div>
+			</div>
 		</main>
 	);
 };

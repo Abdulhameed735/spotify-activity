@@ -42,7 +42,7 @@ const Sidebar = () => {
 	const pathname = usePathname();
 
 	return (
-		<div className="fixed bottom-0 flex w-full flex-col items-center justify-between gap-3 bg-slate-800  p-3 lg:left-0 lg:top-0 lg:w-[8%]">
+		<div className="nav bg-slate-800">
 			<Link href="/" className="hidden lg:block">
 				<Image
 					src="/spotify.svg"
