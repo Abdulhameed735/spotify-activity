@@ -63,7 +63,7 @@ const Sidebar = () => {
 								className={cn("flex flex-col items-center gap-y-2", isActive && "text-green-400")}
 							>
 								<link.icon size={24} />
-								<span className="text-center text-sm">{link.name}</span>
+								<span className="text-center text-xs">{link.name}</span>
 							</div>
 						</Link>
 					);
