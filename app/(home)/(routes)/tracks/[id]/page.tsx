@@ -86,7 +86,7 @@ const TracksPage = ({ params }: { params: { id: string } }) => {
 									&nbsp;.&nbsp;{new Date(tracksData.tracksInfo.album.release_date).getFullYear()}
 								</h3>
 
-								<div className="flex items-center gap-x-4">
+								<div className="flex items-center justify-center gap-x-4">
 									<Link
 										className="my-5 inline-block cursor-pointer rounded-3xl bg-green-500 px-3 py-2 font-semibold uppercase"
 										href={tracksData.tracksInfo.external_urls.spotify}
