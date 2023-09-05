@@ -24,6 +24,7 @@ const TracksPage = ({ params }: { params: { id: string } }) => {
 	const session = data as Session & { accessToken: string | null };
 	const [tracksData, setTracksData] = useState<TracksData | null>(null);
 	const [isLoading, setIsLoading] = useState(true);
+	const [isPlaying, setIsPlaying] = useState(false);
 
 	const fetchTracksData = async () => {
 		if (status === "authenticated" && session) {
@@ -85,13 +86,34 @@ const TracksPage = ({ params }: { params: { id: string } }) => {
 									&nbsp;.&nbsp;{new Date(tracksData.tracksInfo.album.release_date).getFullYear()}
 								</h3>
 
-								<Link
-									className="my-5 inline-block cursor-pointer rounded-3xl bg-green-500 px-3 py-2 font-semibold uppercase"
-									href={tracksData.tracksInfo.external_urls.spotify}
-									target="_blank"
-								>
-									Play on Spotify
-								</Link>
+								<div className="flex items-center gap-x-4">
+									<Link
+										className="my-5 inline-block cursor-pointer rounded-3xl bg-green-500 px-3 py-2 font-semibold uppercase"
+										href={tracksData.tracksInfo.external_urls.spotify}
+										target="_blank"
+									>
+										Play on Spotify
+									</Link>
+									{tracksData.tracksInfo.preview_url && (
+										<div className="flex items-center gap-2">
+											<button
+												className={`my-5 inline-block cursor-pointer rounded-3xl bg-green-500 px-3 py-2 font-semibold uppercase ${
+													isPlaying ? "bg-red-500" : ""
+												}`}
+												onClick={() => setIsPlaying(!isPlaying)}
+											>
+												{isPlaying ? "Pause Preview" : "Play Preview"}
+											</button>
+											{isPlaying && (
+												<audio
+													src={tracksData.tracksInfo.preview_url}
+													autoPlay
+													onEnded={() => setIsPlaying(false)}
+												/>
+											)}
+										</div>
+									)}
+								</div>
 							</div>
 						</div>
 					)}
