@@ -6,3 +6,4 @@ export * from "./artist";
 export * from "./tracks";
 export * from "./artists-data";
 export * from "./tracks-data";
+export * from "./album";
