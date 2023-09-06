@@ -8,7 +8,7 @@ import { AlbumData } from "@/types";
 import TrackListItem from "@/components/ui/tracklist-item";
 import ScaleLoader from "react-spinners/ScaleLoader";
 
-const ArtistPage = ({ params }: { params: { id: string } }) => {
+const AlbumPage = ({ params }: { params: { id: string } }) => {
 	const { data, status } = useSession();
 	const session = data as Session & { accessToken: string | null };
 	const [albumData, setAlbumData] = useState<AlbumData | null>(null);
@@ -77,3 +77,5 @@ const ArtistPage = ({ params }: { params: { id: string } }) => {
 		</div>
 	);
 };
+
+export default AlbumPage;
