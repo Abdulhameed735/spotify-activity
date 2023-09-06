@@ -1,12 +1,13 @@
 "use client";
 import Link from "next/link";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { Session } from "next-auth";
 import axios from "axios";
 import { AlbumData } from "@/types";
-import TrackListItem from "@/components/ui/tracklist-item";
 import ScaleLoader from "react-spinners/ScaleLoader";
+import { convertMillisecondsToTime } from "@/utils/convert-time";
 
 const AlbumPage = ({ params }: { params: { id: string } }) => {
 	const { data, status } = useSession();
@@ -68,7 +69,38 @@ const AlbumPage = ({ params }: { params: { id: string } }) => {
 							</div>
 
 							<div className="my-5 flex-1 lg:my-0 lg:ml-10">
-								<ul className="flex flex-col gap-y-4"></ul>
+								<ul className="flex flex-col gap-y-4">
+									{albumData.tracks.items.map((track) => (
+										<li key={track.id}>
+											<Link className="c-grid" href={`/tracks/${track.id}`}>
+												<Link className="c-grid" href={`/tracks/${track.id}`}>
+													<div className="d2-grid">
+														<div className="d3-grid">
+															<span className="mb-1.5 hover:underline">{track.name}</span>
+															<div className="d4-grid">
+																{track.artists.map((artist, index) => (
+																	<Link
+																		key={artist.id}
+																		className="hover:underline"
+																		href={`/artists/${artist.id}`}
+																	>
+																		{artist.name}
+																		{index < track.artists.length - 1 && ", "}
+																	</Link>
+																))}
+																&nbsp;·&nbsp;&nbsp;
+																<span className="hover:underline">{track.name}</span>
+															</div>
+														</div>
+														<span className="text-base">
+															{convertMillisecondsToTime(track.duration_ms)}
+														</span>
+													</div>
+												</Link>
+											</Link>
+										</li>
+									))}
+								</ul>
 							</div>
 						</div>
 					)}
