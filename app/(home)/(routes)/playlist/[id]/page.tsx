@@ -6,6 +6,7 @@ import { Session } from "next-auth";
 import axios from "axios";
 import { PlaylistData } from "@/types";
 import TrackListItem from "@/components/ui/tracklist-item";
+import ScaleLoader from "react-spinners/ScaleLoader";
 
 const PlaylistPage = ({ params }: { params: { id: string } }) => {
 	const { data, status } = useSession();
@@ -37,8 +38,13 @@ const PlaylistPage = ({ params }: { params: { id: string } }) => {
 	return (
 		<div className="flex h-full flex-col gap-y-16 p-3 lg:p-5">
 			{isLoading ? (
-				<div className="flex items-center justify-center">
-					<p>Loading...</p>
+				<div className="flex h-full items-center justify-center">
+					<ScaleLoader
+						color={"green"}
+						loading={isLoading}
+						aria-label="Loading Spinner"
+						data-testid="loader"
+					/>
 				</div>
 			) : (
 				<>

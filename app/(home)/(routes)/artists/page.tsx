@@ -6,6 +6,7 @@ import { useSession } from "next-auth/react";
 import { Session } from "next-auth";
 import axios from "axios";
 import { UserTopArtistsResponse } from "@/types";
+import ScaleLoader from "react-spinners/ScaleLoader";
 
 const TopArtists = () => {
 	const { data, status } = useSession();
@@ -42,8 +43,13 @@ const TopArtists = () => {
 	return (
 		<div className="flex h-full flex-col gap-y-16 p-3 lg:p-5">
 			{isLoading ? (
-				<div className="flex items-center justify-center">
-					<p>Loading...</p>
+				<div className="flex h-full items-center justify-center">
+					<ScaleLoader
+						color={"green"}
+						loading={isLoading}
+						aria-label="Loading Spinner"
+						data-testid="loader"
+					/>
 				</div>
 			) : (
 				<>
