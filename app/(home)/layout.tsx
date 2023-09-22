@@ -15,7 +15,7 @@ const HomeLayout = ({ children }: { children: React.ReactNode }) => {
 	}, [session, router]);
 
 	return (
-		<main className=" h-full min-h-screen w-full  bg-slate-950 text-white ">
+		<main className="h-full min-h-[100dvh] w-full bg-slate-950 text-white ">
 			<div className="pb-[50px] pl-0 lg:pl-[100px]">
 				<Sidebar />
 
